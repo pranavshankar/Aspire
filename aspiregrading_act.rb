@@ -1,4 +1,6 @@
-def compiler(answerkey, answers, rawScore_conversion = default_conversion)
+default_conversion = ['English', [[[0,35], 18], [[36, 75], 36]], 'Math', [[[0,30], 18], [[31, 60], 36]], 'Science', [[[0,20], 18], [[21, 30], 36]], 'Reading', [[[0,20], 18], [[21, 40], 36]]]
+
+def compiler(answerkey, answers, rawScore_conversion)
 	
 	math_total = 0
 	english_total = 0
