@@ -49,10 +49,11 @@ def classCompiler(scorelist, answerlist, answerkey):
 			for student in answerlist:
 				temp_dict = student[section]
 				for question in temp_dict:
-					if question in question_answers:
-						question_answers[question] += [temp_dict[question]]
-					else:
-						question_answers[question] = [temp_dict[question]]
+					if question != "sectiontype":
+						if question in question_answers:
+							question_answers[question] += [temp_dict[question]]
+						else:
+							question_answers[question] = [temp_dict[question]]
 			for question in question_answers:
 				questionStats[section][question] = questionstats(question_answers[question], answerkey[section][question])
 		else:
@@ -79,9 +80,9 @@ def average_score(scorelist):
 		math_total += [student['Math']]
 		total += [student['total']]
 	score_stats = {}
-	score_stats['Writing'] = stats(writing_total) 
-	score_stats['Math'] = stats(math_total)
-	score_stats['Reading'] = stats(reading_total)
+	score_stats['Writing'] = stats(writing_total)[0] 
+	score_stats['Math'] = stats(math_total)[0]
+	score_stats['Reading'] = stats(reading_total)[0]
 	score_stats['total'] = stats(total)
 	return score_stats
 

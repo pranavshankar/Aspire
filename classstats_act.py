@@ -38,7 +38,6 @@ def classCompiler(scorelist, answerlist, answerkey):
 	>>> x
 	>>> y
 	"""
-	print("fuck")
 	statsdict = {}
 	questionStats = {}
 	essay_score_lst = []
@@ -50,10 +49,11 @@ def classCompiler(scorelist, answerlist, answerkey):
 			for student in answerlist:
 				temp_dict = student[section]
 				for question in temp_dict:
-					if question in question_answers:
-						question_answers[question] += [temp_dict[question]]
-					else:
-						question_answers[question] = [temp_dict[question]]
+					if question != 'sectiontype':
+						if question in question_answers:
+							question_answers[question] += [temp_dict[question]]
+						else:
+							question_answers[question] = [temp_dict[question]]
 			for question in question_answers:
 				questionStats[section][question] = questionstats(question_answers[question], answerkey[section][question])
 		else:
