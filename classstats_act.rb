@@ -8,7 +8,7 @@ def classCompiler(scorelist, answerlist, answerkey):
 		for student in answerlist.keys
 			temp_dict = student[section]
 			for question in temp_dict.keys
-				if question != 'sectiontype':
+				if question != 'sectiontype'
 					if question_answers.has_key?(question)
 						question_answers[question] += [temp_dict[question]]
 					else:
