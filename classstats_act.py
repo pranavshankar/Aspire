@@ -17,18 +17,19 @@ from aspiregrading_act import compiler, Wrong_answers, rawscorefinder
 def classCompiler(scorelist, answerlist, answerkey):
 	"""
 	>>> answerkey = {1: {"sectiontype": "Essay", "score": None}, 2: {"sectiontype": "Math", 1: "A", 2: "B", 3: "C", 4: "D"}}
-	>>> answerkey[3] = {"sectiontype": "Math FRQ", 1: "A", 2: "C", 3: 10, 4: 12, 5: 12, 6: 12, 7: 12, 8: 12, 9: 23, 10: 23, 11: 12, 12: 12}
+	>>> answerkey[3] = {"sectiontype": "Science", 1: "A", 2: "C", 3: "D", 4: "A"}
 	>>> answerkey[4] = {"sectiontype": "English", 1: "A", 2: "B", 3: "D", 4: "C"}
 	>>> answerkey[5] = {"sectiontype": "Reading", 1: "A", 2: "B", 3: "C", 4: "D"}
-	>>> rawscoreconversion = {'Math': {range(15,17): 800, range(0, 15): 780}, 'Writing': {range(2,5): {7: 800}}, 'Reading': {range(2,5): 800}}
-	>>> answers = {1: {"sectiontype": "Essay", "score": 7}, 2: {"sectiontype": "Math", 1: "A", 2: "B", 3: "C", 4: "D"}}
-	>>> answers[3] = {"sectiontype": "Math FRQ", 1: "A", 2: "C", 3: 10, 4: 13, 5: 12, 6: 12, 7: 12, 8: 12, 9: 23, 10: 23, 11: 12, 12: 12}
-	>>> answers[4] = {"sectiontype": "English", 1: "A", 2: "B", 3: "D", 4: "C"}
+	>>> rawscoreconversion = {'Math': {range(2,5): 33}, 'Writing': {range(2,5): 36}, 'Reading': {range(2,5): 36}, 'Science': {range(2,5): 36}}
+	>>> answers = {1: {"sectiontype": "Essay", "score": None}, 2: {"sectiontype": "Math", 1: "A", 2: "B", 3: "C", 4: "D"}}
+	>>> answers[3] = {"sectiontype": "Science", 1: "A", 2: "C", 3: "D", 4: "A"}
+	>>> answers[4] = {"sectiontype": "English", 1: "A", 2: "D", 3: "D", 4: "C"}
 	>>> answers[5] = {"sectiontype": "Reading", 1: "A", 2: "B", 3: "C", 4: "D"}
-	>>> answers1 = {1: {"sectiontype": "Essay", "score": 7}, 2: {"sectiontype": "Math", 1: "C", 2: "B", 3: "D", 4: "A"}}
-	>>> answers1[3] = {"sectiontype": "Math FRQ", 1: "A", 2: "C", 3: 10, 4: 12, 5: 182, 6: 119, 7: 12, 8: 12, 9: 23, 10: 23, 11: 12, 12: 12}
-	>>> answers1[4] = {"sectiontype": "English", 1: "A", 2: "B", 3: "D", 4: "C"}
+	>>> answers1 = {1: {"sectiontype": "Essay", "score": None}, 2: {"sectiontype": "Math", 1: "A", 2: "B", 3: "C", 4: "D"}}
+	>>> answers1[3] = {"sectiontype": "Science", 1: "A", 2: "A", 3: "D", 4: "A"}
+	>>> answers1[4] = {"sectiontype": "English", 1: "A", 2: "B", 3: "A", 4: "C"}
 	>>> answers1[5] = {"sectiontype": "Reading", 1: "A", 2: "B", 3: "C", 4: "D"}
+	>>> x, y = compiler(answerkey, answers, rawscoreconversion)
 	>>> x1, y1 = compiler(answerkey, answers, rawscoreconversion)
 	>>> x2, y2 = compiler(answerkey, answers1, rawscoreconversion)
 	>>> scorelist = [x1, x2]
@@ -37,7 +38,7 @@ def classCompiler(scorelist, answerlist, answerkey):
 	>>> x
 	>>> y
 	"""
-
+	print("fuck")
 	statsdict = {}
 	questionStats = {}
 	essay_score_lst = []
@@ -79,16 +80,19 @@ def average_score(scorelist):
 	writing_total = []
 	reading_total = []
 	math_total = []
+	science_total = []
 	total = []
 	for student in scorelist:
 		writing_total += [student['Writing']]
 		reading_total += [student['Reading']]
 		math_total += [student['Math']]
+		science_total += [student['Science']]
 		total += [student['total']]
 	score_stats = {}
-	score_stats['Writing'] = stats(writing_total) 
-	score_stats['Math'] = stats(math_total)
-	score_stats['Reading'] = stats(reading_total)
+	score_stats['Writing'] = stats(writing_total)[0]
+	score_stats['Math'] = stats(math_total)[0]
+	score_stats['Reading'] = stats(reading_total)[0]
+	score_stats['Science'] = stats(science_total)[0]
 	score_stats['total'] = stats(total)
 	return score_stats
 
